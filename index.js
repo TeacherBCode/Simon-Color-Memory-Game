@@ -7,6 +7,7 @@ let userClickedPattern = [];
 let level = 0;
 let start = 0;
 let currentLevel = 0;
+let highScore = 0;
 
 function nextSeq(){
     let  randomNum = Math.floor(Math.random()*4);
@@ -54,7 +55,10 @@ $(".btn").on("click",function(){
             $("h1").text("Game Over!"); 
             $("body").toggleClass("game-over");
             playSound("wrong");
-
+            if (highScore < (level-1)){
+                highScore = level-1;
+            }
+            $("h3").text("High-Score: "+ highScore);
             userClickedPattern = [];
             gamePattern = [];
             currentLevel = 0;
@@ -62,7 +66,8 @@ $(".btn").on("click",function(){
             start = 0;
             setTimeout(function(){
                 $("body").toggleClass("game-over");
-                $("h1").text("Game Over!\nPress Any Key or\n Click to Restart the Game");
+                $("h1").text("Press Any Key or\n Click to Restart the Game");
+                
             },1000);
         }
     }else if (currentLevel > 0){
@@ -70,8 +75,11 @@ $(".btn").on("click",function(){
             if(gamePattern[currentLevel-1] !== userClickedPattern[currentLevel-1]){
                 $("h1").text("Game Over!"); 
                 $("body").toggleClass("game-over");
+                if (highScore < (level-1)){
+                    highScore = level-1;
+                }
+                $("h3").text("High-Score: "+ highScore);
                 playSound("wrong");
-    
                 userClickedPattern = [];
                 gamePattern = [];
                 currentLevel = 0;
@@ -79,7 +87,7 @@ $(".btn").on("click",function(){
                 start = 0;
                 setTimeout(function(){
                     $("body").toggleClass("game-over");
-                    $("h1").text("Game Over!\nPress Any Key or\n Click to Restart the Game");
+                    $("h1").text("Press Any Key or\n Click to Restart the Game");
                 },1000);
             }
         }
@@ -122,4 +130,6 @@ const compareArrays = (a, b) => {
         return true;
     }
 };
+
+
 
