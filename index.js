@@ -79,7 +79,7 @@ $(".btn").on("click",function(){
                 start = 0;
                 setTimeout(function(){
                     $("body").toggleClass("game-over");
-                    $("h1").text("Game Over!\nPress A to Restart the Game");
+                    $("h1").text("Game Over!\nPress Any Key or\n Click to Restart the Game");
                 },1000);
             }
         }
@@ -89,6 +89,17 @@ $(".btn").on("click",function(){
 
 $(document).on("keydown",function(){
     if (start == 0){
+        currentLevel = 0;
+        userClickedPattern = [];
+        nextSeq();
+        start++;
+    }
+});
+
+$("#start").on("click",function(){
+    if (start == 0){
+        currentLevel = 0;
+        userClickedPattern = [];
         nextSeq();
         start++;
     }
