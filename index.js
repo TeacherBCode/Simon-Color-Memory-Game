@@ -64,9 +64,27 @@ $(".btn").on("click",function(){
                 $("body").toggleClass("game-over");
                 $("h1").text("Game Over!\nPress A to Restart the Game");
             },1000);
-            
+        }
+    }else if (currentLevel > 0){
+        if (currentLevel < level){
+            if(gamePattern[currentLevel-1] !== userClickedPattern[currentLevel-1]){
+                $("h1").text("Game Over!"); 
+                $("body").toggleClass("game-over");
+                playSound("wrong");
+    
+                userClickedPattern = [];
+                gamePattern = [];
+                currentLevel = 0;
+                level = 0;
+                start = 0;
+                setTimeout(function(){
+                    $("body").toggleClass("game-over");
+                    $("h1").text("Game Over!\nPress A to Restart the Game");
+                },1000);
+            }
         }
     }
+    
 });
 
 $(document).on("keydown",function(){
@@ -93,3 +111,4 @@ const compareArrays = (a, b) => {
         return true;
     }
 };
+
